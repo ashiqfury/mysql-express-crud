@@ -1,40 +1,62 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import './App.css';
 import fruits from './fruits';
+import ComboBox from './components/ComboBox';
+import PriceInput from './components/PriceInput';
 
 function App() {
-	const [value, setValue] = useState('');
 	const inputref = useRef();
-
-	const keyHandler = (e) => {
-		if (e.keyCode === 13) {
-			const filtered = fruits.filter((fruit) => fruit.includes(value));
-			setValue(filtered[0]);
-			inputref.current.focus();
-		}
-	};
-
-	const changeHandler = (e) => {
-		const str = e.target.value;
-		const bool = fruits.some((fruit) => fruit.includes(str));
-		console.log(bool, value, str);
-		if (bool) setValue(str);
-	};
-
 	return (
 		<div className="App">
-			<input list="fruits" value={value} onChange={changeHandler} onKeyDown={keyHandler} />
-
-			{/* Combox box */}
-			<datalist id="fruits">
-				{fruits.map((fruit, index) => (
-					<option key={index} value={fruit}>
-						{fruit}
-					</option>
-				))}
-			</datalist>
-
-			<input ref={inputref} placeholder="Input box" />
+			<table>
+				<thead>
+					<tr>
+						<th>Combo Box</th>
+						<th>Date</th>
+						<th>Numbers</th>
+						<th>Price</th>
+						<th>Heading five</th>
+						<th>Heading six</th>
+						<th>Heading seven</th>
+						<th>Heading eight</th>
+						<th>Heading nine</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<ComboBox inputref={inputref} />
+						</td>
+						<td>
+							<input type="date" ref={inputref} placeholder="  -  -  " />
+						</td>
+						<td>
+							<input type="number" />
+						</td>
+						<td>
+							<PriceInput />
+						</td>
+						<td>nice to</td>
+						<td>meet you</td>
+						<td>have a</td>
+						<td>nice</td>
+						<td>day</td>
+					</tr>
+					{fruits.map((fruit) => (
+						<tr key={fruit}>
+							<td>dummy</td>
+							<td>dummy</td>
+							<td>dummy</td>
+							<td>dummy</td>
+							<td>dummy</td>
+							<td>dummy</td>
+							<td>dummy</td>
+							<td>dummy</td>
+							<td>dummy</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
 		</div>
 	);
 }
