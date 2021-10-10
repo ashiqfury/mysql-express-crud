@@ -8,6 +8,9 @@ body {
 	min-height: 100vh;
 	background: rgb(238, 238, 255);
 	font-family: 'Roboto', sans-serif;
+	display: flex;
+	justify-content: center;
+	padding-top: 200px;
 }
 
 input,
@@ -45,4 +48,9 @@ input[type='number']::-webkit-outer-spin-button {
 	-moz-appearance: none;
 	appearance: none;
 	margin: 0;
+}
+
+th,
+td {
+	height: 30px;
 }

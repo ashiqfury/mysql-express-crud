@@ -13,7 +13,7 @@ const ComboBox = ({ inputref }) => {
 
 	const keyHandler = (e) => {
 		if (e.keyCode === 13) {
-			setValue(fruits.filter((fruit) => fruit.includes(value))[0]);
+			setValue(filteredFruits[0]);
 			inputref.current.focus();
 		}
 	};
