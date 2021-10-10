@@ -8,8 +8,7 @@ const ComboBox = ({ inputref }) => {
 	const filterFruits = (val) => {
 		const filterFruits = fruits.filter((fruit) => fruit.startsWith(val));
 		const spaceFruits = fruits.filter((fruit) => fruit.includes(` ${val}`));
-		const finalFruits = filterFruits.concat(spaceFruits);
-		setFilteredFruits(finalFruits);
+		setFilteredFruits([...filterFruits, ...spaceFruits]);
 	};
 
 	const keyHandler = (e) => {

@@ -3,9 +3,6 @@
 	padding: 0;
 	box-sizing: border-box;
 }
-.App {
-	display: flex;
-}
 body {
 	width: 100%;
 	min-height: 100vh;
@@ -23,13 +20,7 @@ select {
 	padding: 0 5px;
 }
 
-.cont,
-.bodyWrapper {
-	width: 100%;
-}
-
 table {
-	/* width: 100%; */
 	border-collapse: collapse;
 }
 thead {
@@ -43,12 +34,9 @@ th {
 }
 td,
 th {
-	/* padding: 5px; */
 	border: 1px solid black;
-	border-collapse: collapse;
 	height: 30px;
 	min-width: 200px;
-	/* max-width: 20px; */
 }
 
 input[type='number']::-webkit-inner-spin-button,
