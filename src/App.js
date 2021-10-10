@@ -1,13 +1,15 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import './App.css';
 import ComboBox from './components/ComboBox';
 import Price from './components/Price';
-// import PriceInput from './components/PriceInput';
+import { handleEnter } from './utilityFunctions';
 
 function App() {
 	const inputref = useRef();
+	const [row, setRow] = useState([1]);
+
 	return (
-		<div>
+		<form>
 			<table>
 				<thead>
 					<tr>
@@ -19,31 +21,26 @@ function App() {
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>
-							<ComboBox inputref={inputref} />
-						</td>
-						<td>
-							<input type="date" ref={inputref} placeholder="  -  -  " />
-						</td>
-						<td>
-							<input type="number" />
-						</td>
-						<td>
-							<Price />
-						</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
+					{row.map((r, i) => (
+						<tr key={i}>
+							<td className="sno">{i + 1}</td>
+							<td>
+								<ComboBox inputref={inputref} />
+							</td>
+							<td>
+								<input type="date" ref={inputref} onKeyDown={(e) => handleEnter(e)} />
+							</td>
+							<td>
+								<input type="number" onKeyDown={(e) => handleEnter(e)} />
+							</td>
+							<td>
+								<Price row={row} setRow={setRow} />
+							</td>
+						</tr>
+					))}
 				</tbody>
 			</table>
-		</div>
+		</form>
 	);
 }
 

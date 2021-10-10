@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import fruits from '../fruits';
+import { handleEnter } from '../utilityFunctions';
 
 const ComboBox = ({ inputref }) => {
 	const [value, setValue] = useState('');
@@ -14,7 +15,8 @@ const ComboBox = ({ inputref }) => {
 	const keyHandler = (e) => {
 		if (e.keyCode === 13) {
 			setValue(filteredFruits[0]);
-			inputref.current.focus();
+			// inputref.current.focus();
+			handleEnter(e);
 		}
 	};
 	const changeHandler = (e) => {
@@ -24,7 +26,13 @@ const ComboBox = ({ inputref }) => {
 
 	return (
 		<>
-			<input list="fruits" value={value} onChange={changeHandler} onKeyDown={keyHandler} />
+			<input
+				list="fruits"
+				value={value}
+				onChange={changeHandler}
+				onKeyDown={keyHandler}
+				autoFocus
+			/>
 			<datalist id="fruits">
 				{filteredFruits.map((fruit, index) => (
 					<option key={index} value={fruit} />
