@@ -4,15 +4,15 @@ const db = require('../connection')
 // CREATE TABLE - USERS
 router.get('/table', (req, res) => {
 	let sql =
-		'CREATE TABLE users(id INT AUTO_INCREMENT, name VARCHAR(255), age INT, mark INT, PRIMARY KEY(id))'
+		'CREATE TABLE IF NOT EXISTS users(id INT AUTO_INCREMENT, name VARCHAR(255), age INT, mark INT, PRIMARY KEY(id))'
 	db.query(sql, (err, result) => {
-		if (err) throw res.status(500).json('Table not create...')
+		if (err) throw res.status(500).json(err)
 		res.status(200).json('Users Table has been created..')
 	})
 })
 
-router.delete('/', (req, res) => {
-	let sql = 'DROP TABLE users'
+router.delete('/table', (req, res) => {
+	let sql = 'DROP TABLE IF EXISTS users'
 	db.query(sql, (err, result) => {
 		if (err) throw res.status(500).json('Table not delete...')
 		res.status(200).json('User Table has been deleted...')
@@ -21,14 +21,8 @@ router.delete('/', (req, res) => {
 
 // CREATE USER
 router.post('/', (req, res) => {
-	let user = {
-		name: req.body.name,
-		age: req.body.age,
-		mark: req.body.mark,
-	}
-
 	let sql = `INSERT INTO users SET ?`
-	db.query(sql, user, (err, result) => {
+	db.query(sql, req.body, (err, result) => {
 		if (err) throw res.status(500).json(err)
 		res.status(200).json('User has been added')
 	})
@@ -41,17 +35,20 @@ router.post('/', (req, res) => {
 
 // UPDATE USER
 router.put('/:id', (req, res) => {
-	let updatedData = {
-		name: req.body.name,
-		age: req.body.age,
-		mark: req.body.mark,
-	}
-
 	let sql = `UPDATE users SET ? WHERE id = ${req.params.id}`
 
-	db.query(sql, updatedData, (err, result) => {
+	db.query(sql, req.body, (err, result) => {
 		if (err) throw res.status(500).json(err)
 		res.status(200).json(result)
+	})
+})
+
+// DELETE ALL USERS
+router.delete('/', (req, res) => {
+	let sql = 'DELETE FROM users'
+	db.query(sql, (err, result) => {
+		if (err) throw res.status(500).json(err)
+		res.status(200).json('Users has been deleted!')
 	})
 })
 
