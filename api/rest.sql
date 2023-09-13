@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 INSERT INTO users (name, age, mark) VALUES('fury', 20, 89);
-UPDATE users SET mark=99 WHERE id=8;
+UPDATE users SET mark=99 WHERE id=2;
 
 SELECT * FROM users;
 
